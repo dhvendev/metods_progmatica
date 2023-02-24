@@ -1,8 +1,9 @@
-# Tasks for progmatics
+# Для прогматики
 
-_Practice debugging tasks for teens.
-➡️ Aiogram, Flask, bs4_
+_Задачи по дебагингу на след темы 
+➡️ Aiogram, Flask, bs4, loop_
 
 | File NAME (*py) | Description |
 | ------ | ------ |
-| debug1 | Fix bug in Flask route and function creation |
+| debug1 | Исправить построение маршрута и отрисовки шаблона |
+| debug2 | Исправить ошибки в выводе порядкового номера элемента, элемента и его длину. |
