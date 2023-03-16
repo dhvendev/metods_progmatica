@@ -1,0 +1,74 @@
+import telebot
+import random
+
+bot = telebot.TeleBot('token')
+
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    text = 'Привет, ' + message.from_user.first_name
+    bot.send_message(message.chat.id, text)
+
+
+@bot.message_handler(commands=['random'])
+def random_number(message):
+    number = random.randint(1, 10)
+    text = 'Вам выпало число: ' + str(number)
+    bot.send_message(message.chat.id, text)
+
+
+@bot.message_handler(commands=['coin'])
+def coin(message):
+    list_variants = ['Орел', 'Решка']
+    text = 'Монетка решила: ' + random.choice(list_variants)
+    bot.send_message(message.chat.id, text)
+
+
+@bot.message_handler(commands=['shar'])
+def shar(message):
+    list_letters = [
+        'В ближайшие дни твое заветное желание исполнится.',
+        'Быстро посмотри в зеркало! Ты видишь самого красивого ребенка.',
+        'Тебя ждет подарок!',
+        'Совсем скоро у тебя появятся новые друзья.',
+        'Твои родители гордятся тобой!',
+        'Веселое приключение ждет тебя на каникулах.'
+    ]
+    text = 'Ваше предсказание: ' + random.choice(list_letters)
+    bot.send_message(message.chat.id, text)
+
+
+#Игра угадай загаданное число ботом от 1 до 10
+@bot.message_handler(commands=['game_random'])
+def game_random(message):
+    number_player = message.text.split()[-1]
+    number_bot = random.randint(1, 10)
+    if int(number_player) == number_bot:
+        text = "Победа, вы угадали!"
+    else:
+        text = "Увы, повезет в другой раз"
+    bot.send_message(message.chat.id, text)
+
+
+#Игра камень-ножницы-бумага
+@bot.message_handler(commands=['knb'])
+def knb(message):
+    player = message.text.split()[-1].lower()
+    computer = random.choice(['камень', 'ножницы', 'бумага'])
+    if player == computer:
+        text = "Ничья!"
+    elif player == 'камень' and computer == 'ножницы':
+        text = "Вы выиграли!"
+    elif player == 'ножницы' and computer == 'бумага':
+        text = "Вы выиграли!"
+    elif player == 'бумага' and computer == 'камень':
+        text = "Вы выиграли!"
+    else:
+        text = "Увы, повезет в другой раз"
+    bot.send_message(message.chat.id, text)
+
+
+
+
+
+bot.infinity_polling()
